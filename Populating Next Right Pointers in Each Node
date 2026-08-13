@@ -1,0 +1,31 @@
+class Solution {
+    public Node connect(Node root) {
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+
+        while (root != null && !q.isEmpty()) {
+            int q_size = q.size();
+            Node prev = null;
+
+            while (q_size-- > 0) {
+                Node front = q.poll();
+
+                if (front.left != null)
+                    q.offer(front.left);
+
+                if (front.right != null)
+                    q.offer(front.right);
+
+                if (prev == null) {
+                    prev = front;
+                    continue;
+                }
+
+                prev.next = front;
+                prev = front;
+            }
+        }
+
+        return root;
+    }
+}
